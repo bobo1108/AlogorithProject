@@ -38,6 +38,23 @@ public class Code01_Comparator {
 		}
 	}
 
+	public static class IdUpOrder implements Comparator<Student> {
+		@Override
+		public int compare(Student o1, Student o2) {
+//			if (o1.id > o2.id) {
+//				return -1;
+//			} else if (o1.id < o2.id) {
+//				return 1;
+//			} else {
+//				return 0;
+//			}
+
+			return o1.id != o2.id ? (o1.id - o2.id) : (o2.age - o1.age);
+		}
+	}
+
+
+
 	// 任何比较器：
 	// compare方法里，遵循一个统一的规范：
 	// 返回负数的时候，认为第一个参数应该排在前面
@@ -150,7 +167,7 @@ public class Code01_Comparator {
 			Student[] students = new Student[]{student1, student2, student3, student4, student5};
 			System.out.println("第一条打印");
 
-			Arrays.sort(students, new AgeUpOrder());
+			Arrays.sort(students, new IdUpOrder());
 			for (int i = 0; i < students.length; i++) {
 				Student student = students[i];
 				System.out.println(student.name + "," + student.id + "," + student.age);
@@ -173,9 +190,10 @@ public class Code01_Comparator {
 			student1 = new Student("A", 4, 40);
 			student2 = new Student("B", 4, 21);
 			student3 = new Student("C", 4, 12);
-			student4 = new Student("D", 4, 62);
-			student5 = new Student("E", 4, 42);
+			student4 = new Student("D", 3, 62);
+			student5 = new Student("E", 3, 42);
 			TreeMap<Student, String> treeMap = new TreeMap<>((a, b) -> (a.id - b.id));
+			//TreeMap<Student, String> treeMap = new TreeMap<>(new IdUpOrder());
 			treeMap.put(student1, "我是学生1，我的名字叫A");
 			treeMap.put(student2, "我是学生2，我的名字叫B");
 			treeMap.put(student3, "我是学生3，我的名字叫C");
